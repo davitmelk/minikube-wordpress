@@ -6,21 +6,21 @@ This project deploys a **WordPress** blog powered by a **MySQL** backend in a **
 
 ## 📁 Project Structure
 
-| File                            | Description                                      |
-| ------------------------------- | ------------------------------------------------ |
-| `ingress.yaml`                  | Ingress resource for exposing WordPress          |
-| `mysql_deployment.yaml`         | MySQL Deployment definition                      |
-| `mysql_network_police.yaml`     | NetworkPolicy restricting MySQL access           |
-| `mysql_ns.yaml`                 | Namespace for MySQL resources                    |
-| `mysql_pvc.yaml`                | PersistentVolumeClaim for MySQL data             |
-| `mysql_secret.yaml`             | Secret storing MySQL credentials                 |
-| `mysql_service.yaml`            | ClusterIP Service to expose MySQL internally     |
-| `wordpress_deployment.yaml`     | WordPress Deployment definition                  |
-| `wordpress_network_police.yaml` | NetworkPolicy restricting WordPress access       |
-| `wordpress_ns.yaml`             | Namespace for WordPress resources                |
-| `wordpress_pvc.yaml`            | PersistentVolumeClaim for WordPress uploads      |
-| `wordpress_secret.yaml`         | Secret storing WordPress DB config               |
-| `wordpress_service.yaml`        | ClusterIP Service to expose WordPress internally |
+| File                          | Description                                      |
+|------------------------------|--------------------------------------------------|
+| `ingress.yaml`               | Ingress resource for exposing WordPress         |
+| `mysql_deployment.yaml`      | MySQL Deployment definition                      |
+| `mysql_network_police.yaml`  | NetworkPolicy restricting MySQL access           |
+| `mysql_ns.yaml`              | Namespace for MySQL resources                    |
+| `mysql_pvc.yaml`             | PersistentVolumeClaim for MySQL data             |
+| `mysql_secret.yaml`          | Secret storing MySQL credentials                 |
+| `mysql_service.yaml`         | ClusterIP Service to expose MySQL internally     |
+| `wordpress_deployment.yaml`  | WordPress Deployment definition                  |
+| `wordpress_network_police.yaml`| NetworkPolicy restricting WordPress access   |
+| `wordpress_ns.yaml`          | Namespace for WordPress resources                |
+| `wordpress_pvc.yaml`         | PersistentVolumeClaim for WordPress uploads      |
+| `wordpress_secret.yaml`      | Secret storing WordPress DB config               |
+| `wordpress_service.yaml`     | ClusterIP Service to expose WordPress internally |
 
 ---
 
@@ -81,7 +81,7 @@ After applying the Ingress, run:
 minikube ip
 ```
 
-Add the following line to your `/etc/hosts` (Linux/macOS) or `C:\Windows\System32\drivers\etc\hosts` (Windows):
+Add the following line to your `/etc/hosts` (Linux/macOS)
 
 ```
 <minikube-ip> davo.loc
@@ -93,12 +93,17 @@ Now access:
 http://davo.loc/wordpress
 ```
 
+Alternatively, to get the service URL (useful if Ingress is not configured):
+
+```bash
+minikube service wordpress-service -n wordpress
+```
+
 ---
 
 ## 🔐 Security
 
 This project includes **Network Policies** to:
-
 - Allow only WordPress pods to access MySQL.
 - Allow DNS egress from MySQL and WordPress.
 - Block all other unnecessary ingress/egress.
